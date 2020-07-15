@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .box {
+            width: 100%;
+        }
+
+        .lunbo {
+            width: 100%;
+            height: 400px;
+            margin: auto;
+            position: relative;
+            margin-top: 10px;
+        }
+
+        .lunbo ul li {
+            width: 100%;
+            height: 255px;
+            position: absolute;
+            top: 0px;
+        }
+
+        .lunbo ul li a {
+            display: inline-block;
+            width: 100%;
+            height: 255px;
+        }
+
+        /*.lunbo ul li a img{
+            width:1029px;
+            height:255px;
+        }*/
+        .buttons {
+            float: left;
+            width: 100%;
+            height: 31px;
+            margin: auto;
+        }
+
+        .buttons div a {
+            display: inline-block;
+            width: 48px;
+            height: 4px;
+            background: #434343;
+            margin-right: 5px;
+            border-radius: 2px;
+        }
+
+        .buttons div a.on2 {
+            background: #cdcdcd;
+        }
+
+        .san {
+            margin: 0 auto;
+            animation-name: san;
+            animation-duration: 0.5s;
+        }
+        img{
+            margin: 0 auto;
+            width: 1920px;
+            height: 390px;
+        }
+        @keyframes san {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+    </style>
+    <script>
+        var index = 0;
+        var timer = null;
+        window.onload = function () {
+            var buttons = document.getElementById("buttons").getElementsByTagName("a");
+            var lunbo = document.getElementById("lunbo").getElementsByTagName("li");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].id = i;
+                buttons[i].onclick = function () {
+                    seton2(this.id);
+                }
+                buttons[i].onmouseover = function () {
+                    clearInterval(timer);
+                }
+                buttons[i].onmouseout = function () {
+                    timer = setInterval(autoPlay, 4000)
+                }
+            }
+            timer = setInterval(autoPlay, 4000);
+
+        };
+        function autoPlay() {
+            var lunbo = document.getElementById("lunbo").getElementsByTagName("li");
+            index++;
+            if (index >= lunbo.length) {
+                index = 0;
+
+            }
+            seton2(index);
+        }
+        function seton2(curIndex) {
+            var buttons = document.getElementById("buttons").getElementsByTagName("a");
+            var lunbo = document.getElementById("lunbo").getElementsByTagName("li");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].className = "";
+                lunbo[i].style.display = "none";
+            }
+            buttons[curIndex].className = "on2";
+            lunbo[curIndex].style.display = "block";
+            index = curIndex;
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <div class="box">
+        <div class="lunbo">
+            <ul id="lunbo">
+                <li class="san"><a href="#"><img src="imgs/1.png" /></a></li>
+                <li class="san" style="display:none;"><a href="#"><img src="imgs/2.png" /></a></li>
+                <li class="san" style="display:none;"><a href="#"><img src="imgs/3.png" /></a></li>
+                <li class="san" style="display:none;"><a href="#"><img src="imgs/4.png" /></a></li>
+                <li class="san" style="display:none;"><a href="#"><img src="imgs/5.png" /></a></li>
+                <li class="san" style="display:none;"><a href="#"><img src="imgs/6.png" /></a></li>
+            </ul>
+        </div>
+        <div class="buttons">
+            <div style="width:400px;margin:auto;" id="buttons">
+                <a href="#" class="on2"></a>
+                <a href="#"></a>
+                <a href="#"></a>
+                <a href="#"></a>
+                <a href="#"></a>
+                <a href="#"></a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
